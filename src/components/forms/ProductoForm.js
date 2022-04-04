@@ -120,6 +120,8 @@ function ProductoForm(props) {
 							<label className='floating'>Fecha baja</label>
 							<input {...register('fecha_baja')} type='date'></input>
 						</div>
+					</div>
+					<div className='form-row'>
 						<div className='form-row-checkbox'>
 							<div className='form-col-checkbox'>
 								<label type='checkbox'>Activo</label>

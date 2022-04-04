@@ -1,13 +1,8 @@
 import React from 'react';
 import './Home.css';
-import Login from './Login';
 
 function Home() {
-	return (
-		<div className='home'>
-			<Login></Login>
-		</div>
-	);
+	return <div className='home'></div>;
 }
 
 export default Home;
