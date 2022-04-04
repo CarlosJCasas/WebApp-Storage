@@ -1,0 +1,54 @@
+.form-grid {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.form-row {
+	display: flex;
+
+	flex-direction: row;
+	justify-content: space-between;
+	gap: 15px;
+}
+
+.form-row-checkbox {
+	display: flex;
+	align-self: flex-start;
+	gap: 15px;
+}
+
+.form-col {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.form-col-checkbox {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 5px;
+}
+
+.reload-button {
+	display: flex;
+	border: none;
+	background-color: inherit;
+	align-self: center;
+	justify-content: flex-end;
+}
+
+#button-row {
+	justify-content: flex-end;
+}
+
+.modal-hr {
+	width: 100%;
+}
+
+.codigo-header {
+	display: flex;
+	flex-direction: row;
+	gap: 1rem;
+}
