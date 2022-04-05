@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
-import './ModalForms.css';
+import './ModalForm.css';
 import PropTypes from 'prop-types';
 
 /* Modal, ¿sirve para todos los forms? */
