@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-/* Postea un nuevo producto a la base de datos */
 export async function postProducto(producto) {
 	try {
 		const response = await axios.post(
@@ -18,7 +17,6 @@ export async function postProducto(producto) {
 	}
 }
 
-/* Elimina un producto de la base de datos */
 export function deleteProducto(producto) {
 	axios
 		.delete('http://localhost:8080/deleteproducto/' + producto.id_producto)

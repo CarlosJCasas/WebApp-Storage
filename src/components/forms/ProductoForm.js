@@ -4,19 +4,16 @@ import { useForm } from 'react-hook-form';
 import * as IoIcons from 'react-icons/io5';
 import * as ProductoServices from '../../services/ProductosServices';
 
-/* Form para rellenar los datos de un nuevo producto y añadirlo a la base de datos */
 function ProductoForm(props) {
 	const [codigobarras, setCodigoBarras] = useState('');
 
-	/* Genera un codgio para el codigo de barras y QR con el que identificar un producto */
+	/* Genera un codigo para el codigo de barras y QR */
 	function generarCodigo() {
 		var n = Math.floor(Math.random() * (99999999 - 10000000 + 1) + 10000000);
 		setCodigoBarras(n);
 	}
 
-	/* UseForm hook
-	Registra todos los datos de los input del form, genera un objeto con todos los datos y define los valores por defecto de los inputs en caso de que no se rellenen.
-	Aplica la validación por defecto de los input, los campos obligatorios no tienen valor por defecto */
+	/* Registra y sumbit el form, define los valores por defecto. Aplica la validación por defecto de los input */
 	const { register, handleSubmit } = useForm({
 		defaultValues: {
 			ubicacion_almacen: '',
@@ -29,14 +26,12 @@ function ProductoForm(props) {
 		shouldUseNativeValidation: true,
 	});
 
-	/* Llamada al servicio de post de productos */
 	const onSubmit = (data) => {
 		ProductoServices.postProducto(data);
 		props.onHide();
 		console.log(JSON.stringify(data));
 	};
 
-	// Revisar CSS de form para no tener tanta columna y fila para crear la estructura
 	return (
 		<div className='form-container'>
 			<form onSubmit={handleSubmit(onSubmit)}>

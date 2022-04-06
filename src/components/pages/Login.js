@@ -29,13 +29,13 @@ function Login() {
 							<label className='login-label' htmlFor='email'>
 								Email
 							</label>
-							<input id='email' type='email' />
+							<input className='login-input' id='email' type='email' />
 						</div>
 						<div className='input-groups'>
 							<label className='login-label' htmlFor='password'>
 								Contraseña
 							</label>
-							<input id='password' type='password' />
+							<input className='login-input' id='password' type='password' />
 						</div>
 					</form>
 					<div className='login-buttons'>

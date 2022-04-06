@@ -1,18 +1,27 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
+import * as ProyectosServices from '../../services/ProyectosServices';
 
 function ProyectoForm(props) {
+	/* Registra y sumbit el form, define los valores por defecto. Aplica la validación por defecto de los input  */
 	const { register, handleSubmit } = useForm({
-		defaultValues: {},
+		defaultValues: {
+			direccion: '',
+			provincia: '',
+			contacto_nombre: '',
+			contacto_telefono: '',
+			contacto_email: '',
+		},
 		shouldUseNativeValidation: true,
 	});
 
 	const onSubmit = (data) => {
-		// Llamar al ProyectoServices POST
-		alert(JSON.stringify(data));
+		ProyectosServices.postProyecto(data);
 		props.onHide();
+		console.log(JSON.stringify(data));
 	};
+
 	return (
 		<div className='form-container'>
 			<form onSubmit={handleSubmit(onSubmit)}>

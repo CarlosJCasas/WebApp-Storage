@@ -9,6 +9,7 @@ import axios from 'axios';
 import tableIcons from '../utils/tableIcons';
 import ModalForm from '../modals/ModalForm';
 import ProyectoForm from '../forms/ProyectoForm';
+import * as ProyectosServices from '../../services/ProyectosServices';
 
 function Proyectos() {
 	var pathName = window.location.pathname;
@@ -74,6 +75,7 @@ function Proyectos() {
 		};
 		fetchProyectos();
 	}, []);
+
 	/* Listado de operaciones y peticion a la base de datos */
 	const [operaciones, setOperaciones] = useState([]);
 	useEffect(() => {
@@ -84,6 +86,7 @@ function Proyectos() {
 		};
 		fetchOperaciones();
 	}, []);
+
 	/* Mapeo de las operaciones que corresponden a cada proyecto */
 	const [map, setMap] = useState(new Map());
 	useEffect(() => {
@@ -149,7 +152,8 @@ function Proyectos() {
 							tooltip: 'Eliminar proyecto',
 							position: 'row',
 							onClick: (event, rowData) => {
-								alert('Eliminar proyecto: ' + rowData.cliente);
+								console.log(rowData);
+								ProyectosServices.deleteProyecto(rowData);
 							},
 						},
 						{
@@ -157,16 +161,16 @@ function Proyectos() {
 							tooltip: 'Eliminar proyecto',
 							position: 'toolbarOnSelect',
 							onClick: (event, rowData) => {
-								// Eliminar los seleccionados
-								alert('Eliminar proyecto: ' + rowData.cliente);
+								ProyectosServices.deleteMultipleProyectos(rowData);
 							},
 						},
 					]}
-					detailPanel={(rowData) => {
+					detailPanel={(rowData, index) => {
 						return (
 							<div className='container-detailpanel'>
 								<div className='detailpanel-table'>
 									<MaterialTable
+										key={index}
 										icons={tableIcons}
 										title={'Operaciones'}
 										options={{

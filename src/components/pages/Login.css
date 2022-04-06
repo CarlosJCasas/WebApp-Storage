@@ -55,7 +55,7 @@
 	font-size: 1.1rem;
 }
 
-input {
+.login-input {
 	padding: 2px 15px;
 	border-radius: 15px;
 	-webkit-border-radius: 15px;
