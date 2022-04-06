@@ -69,8 +69,7 @@ function Proyectos() {
 	const [proyectos, setProyectos] = useState([]);
 	useEffect(() => {
 		const fetchProyectos = async () => {
-			let url = 'http://localhost:8080/proyectos';
-			const result = await axios.get(url);
+			const result = await ProyectosServices.getProyectos();
 			setProyectos(result.data);
 		};
 		fetchProyectos();

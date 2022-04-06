@@ -1,5 +1,14 @@
 import axios from 'axios';
 
+export function getProductos() {
+	try {
+		const response = axios.get('http://localhost:8080/productos');
+		return response;
+	} catch (error) {
+		console.log(error);
+	}
+}
+
 export async function postProducto(producto) {
 	try {
 		const response = await axios.post(

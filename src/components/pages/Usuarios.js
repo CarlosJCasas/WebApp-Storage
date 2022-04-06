@@ -7,22 +7,32 @@ import Edit from '@material-ui/icons/Edit';
 import DeleteOutline from '@material-ui/icons/DeleteOutline';
 import tableIcons from '../utils/tableIcons';
 import axios from 'axios';
-
+import * as UsuariosServices from '../../services/UsuariosServices';
+import ModalForm from '../modals/ModalForm';
+import UsuarioForm from '../forms/UsuarioForm';
 function Usuarios() {
 	var pathName = window.location.pathname;
 	const nombre = pathName.slice(1, -1);
+
+	const columns = [
+		{ title: 'Nombre', field: 'nombre' },
+		{ title: 'Apellidos', field: 'apellidos' },
+		{ title: 'Teléfono 1', field: 'telefono1' },
+		{ title: 'Teléfono 2', field: 'telefono2' },
+		{ title: 'Email', field: 'email' },
+		{ title: 'Rol', field: 'rol' },
+	];
 	const [show, setShow] = useState(false);
 	const handleChange = () => setShow(!show);
-	const [usuarios, setUsuarios] = useState([]);
 
+	const [usuarios, setUsuarios] = useState([]);
 	useEffect(() => {
 		const fetchUsuarios = async () => {
-			let url = 'http://localhost:8080/usuarios';
-			const result = await axios.get(url);
+			const result = await UsuariosServices.getUsuarios();
 			setUsuarios(result.data);
 		};
 		fetchUsuarios();
-	});
+	}, []);
 
 	return (
 		<div className='usuarios'>
@@ -32,14 +42,7 @@ function Usuarios() {
 					icons={tableIcons}
 					title={'Usuarios'}
 					data={usuarios}
-					columns={[
-						{ title: 'Nombre', field: 'nombre' },
-						{ title: 'Apellidos', field: 'apellidos' },
-						{ title: 'Teléfono 1', field: 'telefono1' },
-						{ title: 'Teléfono 2', field: 'telefono2' },
-						{ title: 'Email', field: 'email' },
-						{ title: 'Rol', field: 'rol' },
-					]}
+					columns={columns}
 					localization={{
 						header: {
 							actions: '',
@@ -78,7 +81,7 @@ function Usuarios() {
 							tooltip: 'Eliminar usuario',
 							position: 'row',
 							onClick: (event, rowData) => {
-								alert('Eliminar usuario: ' + rowData.nombre_user);
+								UsuariosServices.deleteUsuario(rowData);
 							},
 						},
 						{
@@ -86,13 +89,16 @@ function Usuarios() {
 							tooltip: 'Eliminar usuario',
 							position: 'toolbarOnSelect',
 							onClick: (event, rowData) => {
-								alert('Eliminar usuario: ' + rowData.nombre_user);
+								UsuariosServices.deleteMultipleUsuarios(rowData);
 							},
 						},
 					]}
 				></MaterialTable>
 			</div>
 			<FooterPages nombre={nombre} handleChange={handleChange}></FooterPages>
+			<ModalForm nombre={nombre} show={show} onHide={handleChange}>
+				<UsuarioForm onHide={handleChange}></UsuarioForm>
+			</ModalForm>
 		</div>
 	);
 }

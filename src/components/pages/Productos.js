@@ -39,7 +39,7 @@ function Productos() {
 			width: '70%',
 		},
 	];
-	/* Datos de las columnas para el panel de detalles del producto (igual hay que cambiarlo por unos recuadros con los datos mejor que table) */
+	/* Datos de las columnas para el panel de detalles del producto */
 	const detailColumns = [
 		{
 			title: 'Alta',
@@ -71,15 +71,14 @@ function Productos() {
 	const [show, setShow] = useState(false);
 	const handleChange = () => setShow(!show);
 
-	/* Listado de productos y el useEffect llamando a la base de datos */
+	/* Productos */
 	const [productos, setProductos] = useState([]);
 	useEffect(() => {
-		const fetchData = async () => {
-			let url = 'http://localhost:8080/productos';
-			const result = await axios.get(url);
+		const fetchProductos = async () => {
+			const result = await ProductoServices.getProductos();
 			setProductos(result.data);
 		};
-		fetchData();
+		fetchProductos();
 	}, []);
 
 	/* Listado de operaciones y el useEffect llamando a la base de datos */
